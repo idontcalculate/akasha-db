@@ -1,0 +1,17 @@
+
+[package]
+name = "vector_search"
+version = "0.1.0"
+edition = "2021"
+
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "vector_search"
+path = "src/main.rs"
+
+[dependencies]
+ndarray = "0.15.3"
+rayon = "1.5.1"
