@@ -5,8 +5,8 @@ version = "0.1.0"
 edition = "2021"
 
 
-[lib]
-path = "src/lib.rs"
+#[lib]
+#path = "src/lib.rs"
 
 [[bin]]
 name = "vector_search"
@@ -15,3 +15,7 @@ path = "src/main.rs"
 [dependencies]
 ndarray = "0.15.3"
 rayon = "1.5.1"
+rand = "0.8.0" # Use the latest version compatible with your project
+rand_distr = "0.4.0" # Use the latest version compatible with your project
+csv = "1.1"
+ndarray-csv = "0.5"

@@ -1,7 +1,6 @@
 // ivf/mod.rs
-// ivf/mod.rs
-use ndarray::{Array1, Array2, Axis};
-use rand::SeedableRng; // for a reproducible RNG
+use ndarray::{Array2, s}; // Importing the `s` macro for slicing
+use rand::{SeedableRng, Rng}; // Importing `Rng` trait
 use rand_distr::{Distribution, Normal};
 
 pub struct IvfIndex {
@@ -14,7 +13,6 @@ pub struct IvfIndex {
 impl IvfIndex {
     pub fn new(data: Array2<f32>) -> Self {
         // Initialization logic with random centroids
-        // Normally, you would use k-means or another method to find centroids
         let n_centroids = 10; // for example
         let mut rng = rand::rngs::StdRng::from_entropy();
         let dist = Normal::new(0.0, 1.0).unwrap();
@@ -28,13 +26,19 @@ impl IvfIndex {
     }
 
     pub fn add_items(&mut self, new_data: Array2<f32>) {
-        // Add items to the index
-        // Placeholder implementation
-        // Here you would also need to assign the new items to centroids and update your inverted lists
-        self.data = new_data;
+        // Placeholder for adding new items to the index
+        // In a full implementation, you would need to assign the new items to centroids
+        // and update the inverted lists accordingly
+        let new_rows = self.data.nrows() + new_data.nrows();
+        let mut updated_data = Array2::zeros((new_rows, self.data.ncols()));
+        updated_data.slice_mut(s![..self.data.nrows(), ..]).assign(&self.data);
+        updated_data.slice_mut(s![self.data.nrows().., ..]).assign(&new_data);
+
+        self.data = updated_data;
+        // The assignments would also need to be updated here
     }
 
-    // Other methods would go here...
+    // Further methods for building the index, assigning vectors, and searching would go here...
 }
 
 #[cfg(test)]
